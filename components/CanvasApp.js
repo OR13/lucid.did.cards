@@ -251,8 +251,6 @@ const CanvasApp = () => {
         autoRotateSpeed={0.5}
         zoomSpeed={0.1}
       />
-      <DemoBox />
-      <Lighting />
       <Particles {...props} />
     </Canvas>
   );

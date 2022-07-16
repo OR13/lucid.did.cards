@@ -4,26 +4,33 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest"
   },
   "dependencies": {
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@mui/material": "^5.9.0",
     "@react-three/drei": "7.6.1",
     "@react-three/fiber": "7.0.6",
-    "@react-three/postprocessing": "^2.4.6",
     "axios": "^0.27.2",
     "glsl-curl-noise2": "0.0.4",
     "glsl-noise": "0.0.0",
+    "jsonld": "5.2.0",
     "leva": "^0.9.29",
     "next": "12.1.4",
-    "react": "18.0.0",
-    "react-dom": "18.0.0",
-    "three": "0.132.2"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-force-graph-3d": "1.21.10",
+    "three": "0.132.2",
+    "three-spritetext": "^1.6.5"
   },
   "devDependencies": {
-    "eslint": "8.12.0",
-    "eslint-config-next": "12.1.4",
     "@babel/core": "7.15.5",
     "babel-plugin-glsl": "1.0.0",
-    "babel-plugin-macros": "3.1.0"
+    "babel-plugin-macros": "3.1.0",
+    "eslint": "8.12.0",
+    "eslint-config-next": "12.1.4",
+    "jest": "^28.1.3"
   }
 }
