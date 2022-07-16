@@ -15,12 +15,28 @@ export default function Home() {
   const [did, setDid] = useState(
     "did:web:did.actor:supply-chain:manufacturer:carlos"
   );
+
+  const title = "Lucid Cards";
+  // const image = await QRCode.didToImageUrl(did);
+  const url = `https://lucid.did.cards`;
+  const description = `Decentralized Identifier Cards`;
   return (
     <>
       <Head>
-        <title>Lucid Cards</title>
+        <title>{title}</title>
         <meta name="description" content="TBD" />
         <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content={description} />
+        <meta property="og:title" content={title} />
+        <meta property="og:url" content={url} />
+        <meta property="og:description" content={description} />
+        {/* <meta property="og:image" content={image} /> */}
+        {/* <meta name="twitter:card" content="summary_large_image" /> */}
+        <meta name="twitter:domain" content="lucid.did.cards" />
+        <meta name="twitter:url" content={url} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        {/* <meta name="twitter:image" content={image} /> */}
       </Head>
       <main>
         <Theme>

@@ -1,5 +1,5 @@
-import UniversalResolver from "../../../services/UniversalResolver";
-import Graph from "../../../services/Graph";
+import UniversalResolver from "../../../../services/UniversalResolver";
+import Graph from "../../../../services/Graph";
 
 export default async function handler(req, res) {
   const { did } = req.query;
