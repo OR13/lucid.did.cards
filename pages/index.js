@@ -8,11 +8,13 @@ const CanvasApp = dynamic(() => import("../components/CanvasApp"), {
 import { useRouter } from "next/router";
 
 import { Paper, Box, TextField, Button } from "@mui/material";
-
-const did = "did:web:did.actor:supply-chain:manufacturer:carlos";
+import { useState } from "react";
 
 export default function Home() {
   const router = useRouter();
+  const [did, setDid] = useState(
+    "did:web:did.actor:supply-chain:manufacturer:carlos"
+  );
   return (
     <>
       <Head>
@@ -29,6 +31,9 @@ export default function Home() {
                 label={"Decentralized Identifier"}
                 value={did}
                 fullWidth
+                onChange={(event) => {
+                  setDid(event.target.value);
+                }}
               />
             </Box>
             <Box sx={{ mt: 2 }}>
