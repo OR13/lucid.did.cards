@@ -7,6 +7,29 @@ import {
   CSS2DObject,
 } from "three/examples/jsm/renderers/CSS2DRenderer.js";
 
+const idToContent = (id) => {
+  let content = id;
+  const jsonType = `^^http://www.w3.org/1999/02/22-rdf-syntax-ns#JSON`;
+  if (content.includes(jsonType)) {
+    content = JSON.stringify(
+      JSON.parse(JSON.parse(content.split(jsonType)[0])),
+      null,
+      2
+    );
+  }
+
+  const integerType = `^^http://www.w3.org/2001/XMLSchema#integer`;
+  if (content.includes(integerType)) {
+    content = content.split(integerType)[0].replace(/\"/g, "");
+  }
+
+  const dateTimeType = `^^http://www.w3.org/2001/XMLSchema#dateTime`;
+  if (content.includes(dateTimeType)) {
+    content = content.split(dateTimeType)[0].replace(/\"/g, "");
+  }
+  return content;
+};
+
 const Network = ({ graphData }) => {
   const fgRef = useRef();
   const extraRenderers = [new CSS2DRenderer()];
@@ -28,23 +51,7 @@ const Network = ({ graphData }) => {
       nodeThreeObjectExtend={true}
       nodeThreeObject={(node) => {
         const nodeEl = document.createElement("div");
-
-        let content = node.id;
-        if (
-          content.includes(`^^http://www.w3.org/1999/02/22-rdf-syntax-ns#JSON`)
-        ) {
-          content = JSON.stringify(
-            JSON.parse(
-              JSON.parse(
-                content.split(
-                  `^^http://www.w3.org/1999/02/22-rdf-syntax-ns#JSON`
-                )[0]
-              )
-            ),
-            null,
-            2
-          );
-        }
+        const content = idToContent(node.id);
         // hmm XSS....
         nodeEl.innerHTML = `<pre>${content}</pre>`;
         nodeEl.style.color = node.color;

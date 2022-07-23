@@ -61,3 +61,7 @@ canvas {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.scene-container {
+  width: 100%;
+}
