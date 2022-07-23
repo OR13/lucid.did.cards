@@ -13,7 +13,7 @@ const Network = dynamic(() => import("../../components/Network"), {
 
 export async function getServerSideProps(context) {
   const jwt = context.params.jwt;
-  const title = "jwt";
+  const title = "VC";
   //   const image = await QRCode.didToImageUrl(did);
   //   const url = `https://lucid.did.cards/credentials/${did}`;
   const description = `Credential Card`;
