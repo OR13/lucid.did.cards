@@ -26,11 +26,14 @@ const expand = (message) => {
 const getType = (data) => {
   if (
     data?.type?.includes("VerifiableCredential") ||
-    data.payload.vc.type.includes("VerifiableCredential")
+    data.payload?.vc?.type.includes("VerifiableCredential")
   ) {
     return "VerifiableCredential";
   }
-  if (data.type.includes("VerifiablePresentation")) {
+  if (
+    data?.type?.includes("VerifiablePresentation") ||
+    data.payload?.vp?.type.includes("VerifiablePresentation")
+  ) {
     return "VerifiablePresentation";
   }
   return null;
@@ -80,10 +83,16 @@ export default async function handler(req, res) {
       //   id: `https://api.did.actor/capability?action=publish&credential=${encoded}&id=${data.credentialSubject.id}`,
       // },
     },
+    VerifiablePresentation: {},
   };
-  const graphData = await Graph.documentToGraph(
-    data.payload ? data.payload.vc : data
-  );
+  let document = data;
+  if (document.payload.vc) {
+    document = document.payload.vc;
+  }
+  if (document.payload.vp) {
+    document = document.payload.vp;
+  }
+  const graphData = await Graph.documentToGraph(document);
   const actor = {
     id: "urn:base64:" + encoded,
     type: "Encoded" + type,
