@@ -7,6 +7,7 @@
 import pako from "pako";
 import base64url from "base64url";
 import Graph from "../../../services/Graph";
+
 const compact = (content) => {
   return base64url.encode(pako.deflate(Buffer.from(JSON.stringify(content))));
 };
@@ -86,13 +87,15 @@ export default async function handler(req, res) {
     VerifiablePresentation: {},
   };
   let document = data;
+
   if (document.payload.vc) {
     document = document.payload.vc;
-  }
-  if (document.payload.vp) {
+  } else if (document.payload.vp) {
     document = document.payload.vp;
   }
+
   const graphData = await Graph.documentToGraph(document);
+
   const actor = {
     id: "urn:base64:" + encoded,
     type: "Encoded" + type,
